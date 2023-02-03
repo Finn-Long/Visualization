@@ -1,0 +1,17 @@
+{
+  "logs": [
+    {
+      "_id": "lfy55",
+      "log": {
+        "logArray": [
+          {
+            "event": "test event",
+            "eventType": "test event type",
+            "timestamp": "test time",
+            "url": "/test url"
+          }
+        ]
+      }
+    }
+  ]
+}
