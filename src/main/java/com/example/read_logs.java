@@ -32,6 +32,7 @@ public class read_logs {
     System.out.println(getLogJson("bash_logs.json"));
   }
 
+
   public static JsonObject getLogJson(String fileName) throws IOException{
     File file = new File(read_logs.class.getClassLoader().getResource(fileName).getFile());
     try (FileReader reader = new FileReader(file)) {
@@ -42,7 +43,6 @@ public class read_logs {
       return null;
     }
   }
-
 
   // return certain numbers of random name in array
   public static String[] getRandomNames(int num) throws ClientProtocolException, IOException {
