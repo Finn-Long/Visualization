@@ -20,7 +20,7 @@ public class FireBaseService {
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(fis))
-                .setDatabaseUrl("https://data-visualization-1b6d6-default-rtdb.firebaseio.com")
+                .setDatabaseUrl("https://visualization-28335-default-rtdb.firebaseio.com/")
                 .build();
 
         FirebaseApp.initializeApp(options);
