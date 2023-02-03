@@ -21,6 +21,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
 
+import com.example.logs.CyverseLog;
+import com.example.logs.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -28,10 +30,55 @@ import com.google.gson.JsonParser;
 
 
 public class read_logs {
+  private static final Object lock = new Object();
   public static void main (String[] args) throws IOException{
-    System.out.println(getLogJson("bash_logs.json"));
+    // System.out.println(getLogJson("bash_logs.json"));
+    List<CyverseLog> cyverseLogs = readAllCyverseLogs("plugin_logs.json");
+    for (int i = 0; i < cyverseLogs.size(); i ++) {
+      System.out.println(cyverseLogs.get(i).toString());
+    }
+    System.out.println("================================================");
+    System.out.println("Total Cyverse Logs: " + cyverseLogs.size());
   }
 
+  public static List<CyverseLog> readAllCyverseLogs(String cyverseFileName) throws IOException{
+    List<CyverseLog> result = new ArrayList<>();
+    JsonObject rawLog = getLogJson(cyverseFileName);
+    JsonArray logArray = rawLog.get("logs").getAsJsonArray();
+    String[] randomNames = getRandomNames(logArray.size());
+    for (int i = 0; i < logArray.size(); i ++) {
+      JsonObject log = logArray.get(i).getAsJsonObject();
+      String studentId = log.get("log_id").getAsString();
+      String fakeName = randomNames[i];
+      synchronized (lock) {
+        if (getNamePair(studentId) == null) {
+          setNamePair(studentId, fakeName);
+        }else {
+          fakeName = getNamePair(studentId);
+        }
+      }
+      JsonArray allLogs = log.get("log").getAsJsonObject().get("logArray").getAsJsonArray();
+      for (int j = 0; j < allLogs.size(); j ++) {
+        JsonObject individualLog = allLogs.get(j).getAsJsonObject();
+        String event = validateGet(individualLog, "event");
+        String eventType = validateGet(individualLog, "eventType");
+        String timestamp = validateGet(individualLog, "timestamp");
+        String url = validateGet(individualLog, "url");
+        Student student = new Student(studentId, fakeName);
+        CyverseLog cyverseLog = new CyverseLog(student, timestamp, eventType, event, url);
+        result.add(cyverseLog);
+      }
+    }
+    return result;
+  }
+
+  public static String validateGet(JsonObject obj, String key) {
+    if (obj.get(key) != null) {
+      return obj.get(key).getAsString();
+    }else {
+      return "N/A";
+    }
+  }
 
   public static JsonObject getLogJson(String fileName) throws IOException{
     File file = new File(read_logs.class.getClassLoader().getResource(fileName).getFile());
@@ -73,7 +120,7 @@ public class read_logs {
     File file_temp = new File(classLoader.getResource("students.json").getFile());
     try (FileWriter fileWriter = new FileWriter(file_temp)) {
       fileWriter.write(jsonObject.toJSONString());
-      fileWriter.flush();
+      //fileWriter.flush();
       fileWriter.close();
     } catch (IOException e) {
       e.printStackTrace();

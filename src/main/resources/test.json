@@ -1,17 +1,1 @@
-{
-  "logs": [
-    {
-      "_id": "lfy55",
-      "log": {
-        "logArray": [
-          {
-            "event": "test event",
-            "eventType": "test event type",
-            "timestamp": "test time",
-            "url": "/test url"
-          }
-        ]
-      }
-    }
-  ]
-}
+{"logs": [{"_id": "ChromePlugin:0016d8ed-1ae8-4c84-8e91-f24c33f5c890","_rev": "1-08f7033c9b2bfd4adde8ba8c4c90fb0f","course_id": "Cyverse_Cloud_Tutorial","created_timestamp": "2022-12-16 03:44:22.989413","log": {"logArray": [{"event": "Plugin Installed","eventType": "System","timestamp": "Thu Dec 15 2022 22:43:53 GMT-0500 (Eastern Standard Time)","url": "/"}],"logID": "CyVerseDefaultUser-83526589","logStart": "Thu Dec 15 2022 22:43:53 GMT-0500 (Eastern Standard Time)","user": "CyVerseDefaultUser"},"log_id": "CyVerseDefaultUser-83526589","log_type": "ChromePlugin","machine_id": "CyVerseDefaultUser","session_id": "None","timestamp": "2022-12-16 03:44:22.989413"}, {"_id": "ChromePlugin:00240cfe-d422-495b-ba3b-52ac52ffbf3d","_rev": "1-7823b4c249f1471ac889b54399d54634","course_id": "Cyverse_Cloud_Tutorial","created_timestamp": "2023-01-07 02:26:09.402155","log": {"logArray": [{"event": "Plugin Installed","eventType": "System","timestamp": "Fri Jan 06 2023 21:25:40 GMT-0500 (Eastern Standard Time)","url": "/"}],"logID": "CyVerseDefaultUser-10334263","logStart": "Fri Jan 06 2023 21:25:40 GMT-0500 (Eastern Standard Time)","user": "CyVerseDefaultUser"},"log_id": "CyVerseDefaultUser-10334263","log_type": "ChromePlugin","machine_id": "CyVerseDefaultUser","session_id": "None","timestamp": "2023-01-07 02:26:09.402155"}]}
